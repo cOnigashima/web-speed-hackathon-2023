@@ -8,7 +8,7 @@ import { TextInput } from '../../foundation/TextInput';
 
 import * as styles from './OrderForm.styles';
 
-type OrderFormValue = {
+export type OrderFormValue = {
   zipCode: string;
   prefecture: string;
   city: string;

@@ -1,17 +1,19 @@
 import type { FC } from 'react';
 import { Helmet } from 'react-helmet';
 import { useNavigate } from 'react-router-dom';
+import { lazy } from 'react';
 
 import { Layout } from '../../components/application/Layout';
 import { WidthRestriction } from '../../components/foundation/WidthRestriction';
-import { OrderForm } from '../../components/order/OrderForm';
 import { OrderPreview } from '../../components/order/OrderPreview';
 import { useAuthUser } from '../../hooks/useAuthUser';
 import { useOrder } from '../../hooks/useOrder';
 import { useSubmitOrder } from '../../hooks/useSubmitOrder';
 import { useUpdateCartItem } from '../../hooks/useUpdateCartItems';
-
+import { OrderFormValue } from '../../components/order/OrderForm';
 import * as styles from './Order.styles';
+
+const OrderForm = lazy(() => import('../../components/order/OrderForm').then(module => ({ default: module.OrderForm })));
 
 export const Order: FC = () => {
   const navigate = useNavigate();
@@ -66,7 +68,7 @@ export const Order: FC = () => {
         <div className={styles.addressForm()}>
           <h2 className={styles.addressFormHeading()}>お届け先</h2>
           <OrderForm
-            onSubmit={(values) => {
+            onSubmit={(values: OrderFormValue) => {
               submitOrder({
                 variables: {
                   address: `${values.prefecture}${values.city}${values.streetAddress}`,

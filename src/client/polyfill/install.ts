@@ -1,4 +1,4 @@
-import 'core-js';
+import 'core-js/stable';
 import 'date-time-format-timezone';
 import 'setimmediate';
 import './temporal';
